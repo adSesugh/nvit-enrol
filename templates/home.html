@@ -1,0 +1,248 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    {% if mess%}
+    <p class="text-center" style="color: red;font-size: 20px;">{{ mess }}</p>
+    {% endif %}
+
+    <div class="row text-center" style="padding: 20px;margin: 20px;">
+        <div class="col"
+            style="border-radius: 20px;background-color:rgb(211,211,211,0.5);margin:0px 10px 0px 10px;height: 600px;">
+            <h2 style="border-radius: 20px 20px 0px 0px;background-color: #0b4c61;color: white;padding: 10px;">Add New User <i class="material-icons">control_point_duplicate</i></h2>
+            <div class="row justify-content-md-center">
+                <div class="col-md-auto col-lg-8 mt-2">
+                    <form class="upe-mutistep-form" id="Upemultistepsform" action='/add' method="POST" enctype="multipart/form-data">
+                        <div class="step-header d-flex mb-4">
+                            <span class="steplevel">Personal Information</span>
+                            <span class="steplevel">Emergency Contact</span>
+                            <span class="steplevel">Guardian</span>
+                            <span class="steplevel">Disability Information</span>
+                            <span class="steplevel">Term and Conditions</span>
+                        </div>
+                        <div class="step">
+                            <div class="row">
+                                <div class="mb-3 col-4">
+                                    <div class="input-group has-validation">
+                                        <input type="text" class="form-control" placeholder="First Name" name="first_name" required>
+                                        <div class="invalid-feedback">
+                                            Please enter your first name.
+                                          </div>
+                                    </div>
+                                </div>
+                                <div class="mb-3 col-4">
+                                    <input type="text" class="form-control" placeholder="Middle Name" name="middle_name">
+                                </div>
+                                <div class="mb-3 col-4">
+                                    <input type="text" class="form-control" placeholder="Last Name" name="last_name" required>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="mb-3 col-4">
+                                    <input type="email" class="form-control" placeholder="Email Address" name="email" required>
+                                </div>
+                                <div class="mb-3 col-4">
+                                    <input type="text" class="form-control" placeholder="Phone Number" name="phone_number" required>
+                                </div>
+                                <div class="mb-3 col-4">
+                                    <input type="date" class="form-control" placeholder="Date of Birth" name="dob" required>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="mb-3 col-4">
+                                    <select name="gender" class="form-select" required>
+                                        <option value="" disabled selected>Select Gender</option>
+                                        <option value="Male">Male</option>
+                                        <option value="Female">Female</option>
+                                        <option value="Other">Other</option>
+                                    </select>
+                                </div>
+                                <div class="mb-3 col-4">
+                                    <select name="state_of_origin" onchange="getState(this);" class="form-select" id="stateOfOrigin" required></select>
+                                </div>
+                                <div class="mb-3 col-4">
+                                    <select name="lga_of_origin" class="form-select" id="lgaOfOrigin" required>
+                                        <option value="" disabled selected>Select Local Government Area</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="mb-3 col-4">
+                                    <select name="course_of_study" class="form-select" id="courseOfStudy" required>
+                                        <option value="" disabled selected>Select Course of Study</option>
+                                    </select>
+                                </div>
+                                <div class="mb-3 col-4">
+                                    <select name="means_of_id" class="form-select">
+                                        <option value="" disabled selected>Select Means of ID</option>
+                                        <option value="NIN">NIN</option>
+                                        <option value="PVC">PVC</option>
+                                        <option value="Driver's license">Driver's license</option>
+                                    </select>
+                                </div>
+                                <div class="mb-3 col-4">
+                                    <input type="file" accept="image/png,jpeg,jpg" class="form-control" placeholder="" name="means_of_id_upload">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="mb-3 col-6">
+                                    <select name="level_of_education" class="form-select" required>
+                                        <option value="" disabled selected>Select Level of Education</option>
+                                        <option value="PhD">PhD</option>
+                                        <option value="Masters">Masters</option>
+                                        <option value="Bachelor degree">Bachelor degree</option>
+                                        <option value="HND">HND</option>
+                                        <option value="ND">National Diploma</option>
+                                        <option value="NCE">NCE</option>
+                                        <option value="SSCE">SSCE</option>
+                                    </select>
+                                </div>
+                                <div class="mb-3 col-6">
+                                    <select name="employment_status" class="form-select" required>
+                                        <option value="" disabled selected>Select Employment Status</option>
+                                        <option value="Employed">Employed</option>
+                                        <option value="Unemployed">Unemployed</option>
+                                        <option value="Self employed">Self Employed</option>
+                                        <option value="Other">Other</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="mb-3 col-12">
+                                    <textArea name="address" rows='2' class="form-control" required placeholder="Home Address"></textArea>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="step">
+                            <div class="row">
+                                <div class="mb-3 col-4">
+                                    <input type="text" class="form-control" placeholder="Full Name" name="emergency_full_name" required >
+                                </div>
+                                <div class="mb-3 col-4">
+                                    <input type="email" class="form-control" placeholder="Email address" name="emergency_email" required>
+                                </div>
+                                <div class="mb-3 col-4">
+                                    <input type="number" class="form-control" placeholder="Phone Number" name="emergency_phone_number" required>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="mb-3 col-12">
+                                    <textArea name="emergency_address" rows='3' class="form-control" required placeholder="Home Address"></textArea>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="step">
+                            <div class="row">
+                                <div class="mb-3 col-6">
+                                    <input type="text" class="form-control" placeholder="First Name" name="guardian_first_name" required >
+                                </div>
+                                <div class="mb-3 col-6">
+                                    <input type="text" class="form-control" placeholder="Last Name" name="guardian_last_name" required>
+                                </div>
+                                <div class="mb-3 col-6">
+                                    <input type="number" class="form-control" placeholder="Phone Number" name="guardian_phone_number" required>
+                                </div>
+                                <div class="mb-3 col-6">
+                                    <input type="email" class="form-control" placeholder="Email Address" name="guardian_email" required>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="step">
+                            <div class="row">
+                                <div class="mb-3 col-12">
+                                    <select name="disabled" class="form-select" required>
+                                        <option value="" disabled selected>Select yes if disabled</option>
+                                        <option value="yes">Yes</option>
+                                        <option value="no">No</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="mb-3 col-12">
+                                    <textArea name="disability_detail" rows='6' class="form-control" placeholder="Disability Details"></textArea>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="step mb-3">
+                            <div class="row my-4">
+                                <div class="col-md-auto">
+                                    <div class="form-check">
+                                        <input name='terms' class="form-check-input" type="checkbox" id="invalidCheck" required>
+                                        <label class="form-check-label" for="invalidCheck">
+                                            Agree to terms and conditions
+                                        </label>
+                                        <div class="invalid-feedback">
+                                            You must agree before submitting.
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="d-flex btn-row">
+                            <button class="btn btn-primary fw-bold m-1 px-5 py-2" id="prevBtn" onclick="nextPrev(-1)"
+                                    type="button">Previous</button>
+                            <button class="btn btn-primary fw-bold m-1 px-5 py-2" id="nextBtn" onclick="nextPrev(1)"
+                                    type="button">Next</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            'use strict'
+          
+            let dropdown = $('#stateOfOrigin');
+
+              dropdown.empty();
+  
+              dropdown.append('<option value="" disabled selected="true">Select State of Origin</option>');
+              dropdown.prop('selectedIndex', 0);
+  
+              fetch("./static/nigeria-state-and-lgas.json").then((res) => { 
+                      return res.json(); 
+                  }).then((data) => {
+                      data.forEach(el => {
+                          dropdown.append($('<option></option>').attr('value', el.state).text(el.state));
+                      })
+                  });
+
+            let courseDropdown = $('#courseOfStudy')
+            courseDropdown.empty();
+            courseDropdown.append('<option value="" disabled selected="true">Select Course of Study</option>');
+            courseDropdown.prop('selectedIndex', 0);
+  
+              fetch("./static/courses.json").then((res) => { 
+                      return res.json(); 
+                  }).then((data) => {
+                      data.forEach(el => {
+                        courseDropdown.append($('<option></option>').attr('value', el).text(el));
+                      })
+                  });
+
+        })
+
+        function getState(sel){
+            let dropdown = $('#lgaOfOrigin');
+
+              dropdown.empty();
+  
+              dropdown.append('<option value="" disabled selected="true">Select LGA of Origin</option>');
+              dropdown.prop('selectedIndex', 0);
+  
+              fetch("./static/nigeria-state-and-lgas.json").then((res) => { 
+                      return res.json(); 
+                  }).then((data) => {
+                    const lga = data.filter(a => a.state == sel.value)[0].lgas
+                    lga.forEach(el => {
+                        dropdown.append($('<option></option>').attr('value', el).text(el));
+                    })
+                });
+        }
+
+        
+    </script>
+
+{% endblock %}

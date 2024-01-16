@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>NVIT's Enrollment Face Recognition System</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style type='text/css'>
+        * {
+            padding: 0;
+            margin: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+    
+    
+        body {
+            background-image: url('https://cutewallpaper.org/21/1920-x-1080-gif/1920x1080-Wallpapercartoon-Wallpapers-Driverlayer-Search-.gif');
+            background-size: cover;
+            font-family: sans-serif;
+            margin-top: 40px;
+            height: 100vh;
+            padding: 0;
+            margin: 0;
+        }
+    
+        table {
+            border: 1px;
+            font-family: arial, sans-serif;
+            border-collapse: collapse;
+            width: 86%;
+            margin: auto;
+        }
+    
+        td,
+        th {
+            border: 1px solid black !important;
+            padding: 5px;
+        }
+    
+        tr:nth-child(even) {
+            background-color: #dddddd;
+        }
+        /* your CSS goes here*/
+     body {
+        background: #eee
+    }
+    
+     .upe-mutistep-form .step{
+        display: none;
+    }
+    .upe-mutistep-form .step-header .steplevel {
+        position: relative;
+        flex: 1;
+        padding-bottom: 30px;
+    }
+    .upe-mutistep-form .step-header .steplevel.active {
+        font-weight: 600;
+    }
+    .upe-mutistep-form .step-header .steplevel.finish {
+        font-weight: 600;
+        color: #009688;
+    }
+    .upe-mutistep-form .step-header .steplevel::before {
+        content: "";
+        position: absolute;
+        left: 50%;
+        bottom: 0;
+        transform: translateX(-50%);
+        z-index: 9;
+        width: 20px;
+        height: 20px;
+        background-color: #d5efed;
+        border-radius: 50%;
+        border: 3px solid #ecf5f4;
+    }
+    .upe-mutistep-form .step-header .steplevel.active::before {
+        background-color: #3fbdb4;
+        border: 3px solid #d5f9f6;
+    }
+    .upe-mutistep-form .step-header .steplevel.finish::before {
+        background-color: #3fbdb4;
+        border: 3px solid #3fbdb4;
+    }
+    .upe-mutistep-form .step-header .steplevel::after {
+        content: "";
+        position: absolute;
+        left: 50%;
+        bottom: 8px;
+        width: 100%;
+        height: 3px;
+        background-color: #f3f3f3;
+    }
+    .upe-mutistep-form .step-header .steplevel.active::after {
+        background-color: #a7ede8;
+    }
+    .upe-mutistep-form .step-header .steplevel.finish::after {
+        background-color: #009688;
+    }
+    .upe-mutistep-form .step-header .steplevel:last-child:after {
+        display: none;
+    }
+    
+    form > div {
+        margin-top: 18px;
+        position: relative;
+    }
+    
+    form > div > input {
+        width: 95%;
+        border: 1px solid #ccc;
+        padding: 10px;
+    }
+    
+    form > div > span.error {
+        display: none;
+        font-size: 0.8em;
+        position: absolute;
+    }
+    form > div >input:invalid:not(:focus):not(:placeholder-shown) ~ .error {
+        display: block;
+        color: red;
+    }
+
+    form input[type="submit"] {
+        display: block;
+        width: 100%;
+        margin-top: 18px;
+        background: #41D873;
+        color: white;
+        padding:13px;
+    }
+    </style>
+</head>
+<body>
+    <div class="container-fluid">
+        <header>
+            <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                <div class="container-fluid">
+                  <a class="navbar-brand" href="#">NVIT</a>
+                  <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                  </button>
+                  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                      <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="/">Home</a>
+                      </li>
+                      <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('attendance_list') }}">Attendance</a>
+                      </li>
+                    </ul>
+                    <form class="d-flex">
+                      <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                      <button class="btn btn-outline-success" type="submit">Search</button>
+                    </form>
+                  </div>
+                </div>
+              </nav>
+        </header>
+        <div class='mt-3 text-center'>
+            <h1 style="width: auto;margin: auto;padding: 11px;font-size: 44px;">NVIT's Enrollment Face Recognition & Document Verification System</h1>
+        </div>
+        {% block content %}
+        {% endblock %}
+    </div>
+
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js">
+</script>
+<script>
+    var currentTab = 0;
+    tabShow(currentTab);
+
+    function tabShow(n) {
+        var x = document.getElementsByClassName("step");
+        var forms = document.querySelectorAll('.needs-validation')
+        x[n].style.display = "block";
+        if (n == 0) {
+            document.getElementById("prevBtn").style.display = "none";
+        } else {
+            document.getElementById("prevBtn").style.display = "inline";
+        }
+        if (n == (x.length - 1)) {
+            document.getElementById("nextBtn").innerHTML = "submit"
+        } else {
+            document.getElementById("nextBtn").innerHTML = "Next"
+        }
+        activelevel(n)
+    }
+    function nextPrev(n) {
+        var x = document.getElementsByClassName("step");
+        
+        x[currentTab].style.display = "none";
+        currentTab = currentTab + n;
+        if (currentTab >= x.length) {
+              document.getElementById("Upemultistepsform").submit();
+            
+            return false;
+        }
+        tabShow(currentTab);
+    }
+    function backPrev(n) {
+        var x = document.getElementsByClassName("step");
+        x[n].style.display = "block";
+    }
+    function activelevel(n) {
+        var i, x = document.getElementsByClassName("steplevel");
+        for (i = 0; i < x.length; i++) {
+            x[i].className = x[i].className.replace(" active", "");
+        }
+        x[n].className += " active";
+    }
+</script>
+</body>
+</html>

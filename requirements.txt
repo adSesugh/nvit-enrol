@@ -1,0 +1,10 @@
+Flask
+Flask-Migrate
+Flask-Reuploaded
+Flask-SQLAlchemy
+opencv-python
+pandas
+psycopg2-binary
+python-dateutil
+python-dotenv
+scikit-learn
